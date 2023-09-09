@@ -1,5 +1,3 @@
-Certainly, Yaman. Here's a simple README file for your GitHub repository for generating the Mandelbrot set using Python and the moderngl library:
-
 ```markdown
 # Mandelbrot Set Generator
 
