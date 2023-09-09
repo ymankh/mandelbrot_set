@@ -1,4 +1,3 @@
-```markdown
 # Mandelbrot Set Generator
 
 ## Overview
