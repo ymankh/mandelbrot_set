@@ -29,7 +29,7 @@ class Fractal(Example):
         self.center.value = (0.5, 0.0)
         self.JuliaC.value = (-0.8, 0.156)
         self.new_JuliaC = self.JuliaC.value
-        self.type.value = 4
+        self.type.value = 0
         self.iter.value = 100
         self.scale.value = 1.25
         self.power.value = 1.0
@@ -49,9 +49,9 @@ class Fractal(Example):
         self.going_down = False
         self.is_zooming = False
         self.is_shrinking = False
-        self.power_increas = False
-        self.power_decreas = False
-        self.iter_increae = False
+        self.power_increase = False
+        self.power_decrees = False
+        self.iter_increase = False
         self.iter_decrease = False
 
     def render(self, time, frame_time):
@@ -59,7 +59,7 @@ class Fractal(Example):
         self.texture.use()
         self.vao.render(moderngl.TRIANGLE_STRIP)
 
-        # movment
+        # movement
         value = self.new_center
         scale = self.scale.value * frame_time
         if self.going_right:
@@ -86,10 +86,10 @@ class Fractal(Example):
             self.zoom = lerp(self.zoom, 1)
 
         # power
-        if self.power_increas or self.power_decreas:
-            if self.power_increas:
+        if self.power_increase or self.power_decrees:
+            if self.power_increase:
                 self.new_power += frame_time
-            if self.power_decreas:
+            if self.power_decrees:
                 self.new_power -= frame_time
         self.power.value = lerp(self.power.value, self.new_power)
 
@@ -101,7 +101,7 @@ class Fractal(Example):
                              lerp(y, new_y))
 
         # lope iterations (accuracy)
-        if self.iter_increae:
+        if self.iter_increase:
             self.iter.value += 1
         if self.iter_decrease:
             self.iter.value -= 1
@@ -129,11 +129,11 @@ class Fractal(Example):
             if key == keys.X:
                 self.is_shrinking = True
             if key == keys.P:
-                self.power_increas = True
+                self.power_increase = True
             if key == keys.O:
-                self.power_decreas = True
+                self.power_decrees = True
             if key == keys.K:
-                self.iter_increae = True
+                self.iter_increase = True
             if key == keys.L:
                 self.iter_decrease = True
             if key == keys.M:
@@ -154,11 +154,11 @@ class Fractal(Example):
             if key == keys.X:
                 self.is_shrinking = False
             if key == keys.P:
-                self.power_increas = False
+                self.power_increase = False
             if key == keys.O:
-                self.power_decreas = False
+                self.power_decrees = False
             if key == keys.K:
-                self.iter_increae = False
+                self.iter_increase = False
             if key == keys.L:
                 self.iter_decrease = False
 
