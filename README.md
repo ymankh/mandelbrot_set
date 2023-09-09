@@ -28,13 +28,13 @@ git clone https://github.com/ymankh/mandelbrot_set.git
 2. Navigate to the repository's directory.
 
 ```bash
-cd mandelbrot-generator
+cd mandelbrot_set
 ```
 
 3. Run the Python script.
 
 ```bash
-python mandelbrot.py
+python mandelbrot_set.py
 ```
 
 ## Controls
