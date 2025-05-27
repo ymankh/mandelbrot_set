@@ -106,12 +106,12 @@ class Fractal(Example):
         if self.iter_decrease:
             self.iter.value -= 1
 
-    def mouse_press_event(self, x, y, button):
+    def on_mouse_press(self, x, y, button):
         if button == 1:
             self.new_JuliaC = (
                 x * 2 / self.window_size[0] - 1, y * 2 / self.window_size[1] - 1)
 
-    def key_event(self, key, action, modifiers):
+    def on_key_event(self, key, action, modifiers):
         keys = self.wnd.keys
         scale = self.scale.value
         # Key presses
