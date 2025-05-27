@@ -54,7 +54,7 @@ class Fractal(Example):
         self.iter_increase = False
         self.iter_decrease = False
 
-    def render(self, time, frame_time):
+    def on_render(self, time, frame_time):
         self.ctx.clear(1.0, 1.0, 1.0)
         self.texture.use()
         self.vao.render(moderngl.TRIANGLE_STRIP)
