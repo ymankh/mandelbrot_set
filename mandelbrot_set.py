@@ -63,6 +63,7 @@ class Fractal(Example):
             "  Mouse click/drag sets Julia seed",
             "  WASD pans the view",
             "  Z / X zoom in or out",
+            "  R resets view",
             "  P / O adjust fractal power",
             "  1-9 set fractal power target",
             "  K / L tweak iteration depth",
@@ -105,13 +106,19 @@ class Fractal(Example):
                              lerp(y, new_y))
 
         # zooming
+        zoom_step = 0.99
         if self.is_zooming or self.is_shrinking:
-            if self.is_zooming:
-                self.zoom = lerp(self.zoom, 0.99)
-            if self.is_shrinking:
-                self.zoom = lerp(self.zoom, 1/0.99)
+            if self.is_zooming and not self.is_shrinking:
+                target_zoom = zoom_step
+            elif self.is_shrinking and not self.is_zooming:
+                target_zoom = 1.0 / zoom_step
+            else:
+                target_zoom = 1.0
+            self.zoom = lerp(self.zoom, target_zoom)
+            self.new_scale *= self.zoom
+            self.new_scale = max(self.new_scale, 1e-6)
         else:
-            self.zoom = lerp(self.zoom, 1)
+            self.zoom = lerp(self.zoom, 1.0)
 
         # power
         if self.power_increase or self.power_decrees:
