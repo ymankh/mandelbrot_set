@@ -38,6 +38,7 @@ class Fractal(Example):
         self.ratio.value = self.aspect_ratio
         self.zoom = 1
         self.new_center = self.center.value
+        self.new_scale = self.scale.value
         self.new_power = 2.0
 
         vertices = np.array([-1.0, -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0])
@@ -79,6 +80,7 @@ class Fractal(Example):
             key_code = getattr(keys, attr, None)
             if key_code is not None:
                 self._numeric_power_bindings[key_code] = float(value)
+        self._reset_zoom_key = getattr(keys, 'R', None)
 
     def on_render(self, time, frame_time):
         self.ctx.clear(1.0, 1.0, 1.0)
@@ -119,7 +121,7 @@ class Fractal(Example):
                 self.new_power -= frame_time
         self.power.value = lerp(self.power.value, self.new_power)
 
-        self.scale.value *= self.zoom
+        self.scale.value = lerp(self.scale.value, self.new_scale)
 
         x, y = self.JuliaC.value
         new_x, new_y = self.new_JuliaC
@@ -179,6 +181,12 @@ class Fractal(Example):
                 self.is_zooming = True
             if key == keys.X:
                 self.is_shrinking = True
+            if self._reset_zoom_key and key == self._reset_zoom_key:
+                self.new_center = (0.5, 0.0)
+                self.new_scale = 1.25
+                self.zoom = 1
+                self.going_right = self.going_left = False
+                self.going_up = self.going_down = False
             if key == keys.P:
                 self.power_increase = True
             if key == keys.O:
